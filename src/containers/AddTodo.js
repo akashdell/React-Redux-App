@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { addTodo } from "../actions";
 
 class AddTodo extends Component {
-  state = { num: 0 };
   componentWillMount() {
     console.log("component", this.props);
   }
+
   render() {
     return (
       <div>
@@ -14,27 +14,29 @@ class AddTodo extends Component {
           type="submit"
           onClick={e => {
             e.preventDefault();
-            this.setState({
-              num: this.state.num + 1
-            });
-            this.props.addTodo(this.state.num);
+            // this.setState({
+            //   num: this.state.num + 1
+            // });
+            this.props.addTodo(this.props.num);
           }}
         >
-          Add Todo
+          Counter
         </button>
-        <p>{this.state.num}</p>
+        <p>{this.props.num}</p>
       </div>
     );
   }
 }
 const mapStateToProps = state => {
-  console.log("aSad", state);
+  console.log("mapStateToProps", state);
   return {
-    num: state.num
+    num: state.todos.num
   };
 };
-const mapDispatchToProps = () => {
-  return { addTodo };
+const mapDispatchToProps = dispatch => {
+  return {
+    addTodo: num => dispatch(addTodo(num))
+  };
 };
 
 export default connect(
