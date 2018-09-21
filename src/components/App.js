@@ -1,11 +1,11 @@
 import React from "react";
-import { dispatch } from "redux";
+import { connect } from "react-redux";
 import AddTodo from "../containers/AddTodo";
 
 const App = () => (
   <div>
-    <AddTodo dispatch={dispatch} />
+    <AddTodo />
   </div>
 );
 
-export default App;
+export default connect()(AddTodo);
