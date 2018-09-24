@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../actions";
+import { addTodo, subtractTodo } from "../actions";
 
 class AddTodo extends Component {
   componentWillMount() {
@@ -20,7 +20,20 @@ class AddTodo extends Component {
             this.props.addTodo(this.props.num);
           }}
         >
-          Counter
+          Increment
+        </button>
+        {"       "}
+        <button
+          type="submit"
+          onClick={e => {
+            e.preventDefault();
+            // this.setState({
+            //   num: this.state.num + 1
+            // });
+            this.props.subtractTodo(this.props.num);
+          }}
+        >
+          Decrement
         </button>
         <p>{this.props.num}</p>
       </div>
@@ -35,7 +48,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    addTodo: num => dispatch(addTodo(num))
+    addTodo: num => dispatch(addTodo(num)),
+    subtractTodo: num => dispatch(subtractTodo(num))
   };
 };
 
